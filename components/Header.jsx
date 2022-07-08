@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import { useCartContext } from '../hooks/useCartContext'
 
 export const Header = () => {
+  const { cart } = useCartContext()
   return (
     <header>
       <nav
@@ -12,7 +14,14 @@ export const Header = () => {
         </Link>
         <div>
           <Link href='/cart'>
-            <a className='px-2'>Cart</a>
+            <a className='px-2'>
+              Cart
+              {cart.cartItems.length > 0 && (
+                <span className='ml-1 py-0.5 px-1.5 rounded-full bg-rose-300 font-bold text-white text-xs'>
+                  {cart.cartItems.reduce((acc, cur) => acc + cur.qty, 0)}
+                </span>
+              )}
+            </a>
           </Link>
           <Link href='/login'>
             <a className='px-2'>Login</a>
