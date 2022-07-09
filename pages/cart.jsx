@@ -10,6 +10,11 @@ const Cart = () => {
   const { cartItems } = cart
   const router = useRouter()
 
+  const updateCartHandler = (item, val) => {
+    const qty = Number(val)
+    dispatch({ type: 'CART_ADD_ITEM', payload: {...item, qty }})
+  }
+
   const removeItemHandler = item => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item })
   }
@@ -47,9 +52,17 @@ const Cart = () => {
                         </a>
                       </Link>
                     </td>
-                    <td className='p-5'>{item.qty}</td>
-                    <td clasName='p-5'>${item.price}</td>
-                    <td clasName='p-5'>
+                    <td className='p-5'>
+                      <select value={item.qty} onChange={e => updateCartHandler(item, e.target.value)}>
+                        {[...Array(item.qtyInStock).keys()].map(q => (
+                          <option key={q + 1} value={q + 1}>
+                            {q + 1}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                    <td className='p-5'>${item.price}</td>
+                    <td className='p-5'>
                       <button onClick={() => removeItemHandler(item)}>
                         <XCircleIcon className='w-6 h-6'></XCircleIcon>
                       </button>
