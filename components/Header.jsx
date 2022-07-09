@@ -17,7 +17,7 @@ export const Header = () => {
             <a className='px-2'>
               Cart
               {cart.cartItems.length > 0 && (
-                <span className='ml-1 py-0.5 px-1.5 rounded-full bg-rose-300 font-bold text-white text-xs'>
+                <span className='ml-1 py-0.5 px-1.5 rounded-full bg-teal-500 font-bold text-white text-xs'>
                   {cart.cartItems.reduce((acc, cur) => acc + cur.qty, 0)}
                 </span>
               )}

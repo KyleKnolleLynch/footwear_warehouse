@@ -7,6 +7,7 @@ import { useCartContext } from '../../hooks/useCartContext'
 
 export default function ProductScreen() {
   const { cart, dispatch } = useCartContext()
+  const router = useRouter()
   const { query } = useRouter()
   const { slug } = query
   const product = data.products.find(p => p.slug === slug)
@@ -14,7 +15,7 @@ export default function ProductScreen() {
   if (!product) {
     return <div>Product not found</div>
   }
-  
+
   const addToCartHandler = () => {
     //  check if item is already in cart, if so increment qty else add it to cart
     const existItem = cart.cartItems.find(i => i.slug === product.slug)
@@ -24,9 +25,10 @@ export default function ProductScreen() {
     if (product.qtyInStock < qty) {
       alert('Sorry, this product is currently out of stock.')
       return
-    } 
+    }
 
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, qty } })
+    router.push('/cart')
   }
 
   return (
