@@ -4,6 +4,7 @@ import { Layout } from '../components'
 import { useCartContext } from '../hooks/useCartContext'
 import { XCircleIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 
 const Cart = () => {
   const { cart, dispatch } = useCartContext()
@@ -12,7 +13,7 @@ const Cart = () => {
 
   const updateCartHandler = (item, val) => {
     const qty = Number(val)
-    dispatch({ type: 'CART_ADD_ITEM', payload: {...item, qty }})
+    dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, qty } })
   }
 
   const removeItemHandler = item => {
@@ -53,7 +54,10 @@ const Cart = () => {
                       </Link>
                     </td>
                     <td className='p-5'>
-                      <select value={item.qty} onChange={e => updateCartHandler(item, e.target.value)}>
+                      <select
+                        value={item.qty}
+                        onChange={e => updateCartHandler(item, e.target.value)}
+                      >
                         {[...Array(item.qtyInStock).keys()].map(q => (
                           <option key={q + 1} value={q + 1}>
                             {q + 1}
@@ -83,7 +87,12 @@ const Cart = () => {
                 </p>
               </li>
               <li>
-                <button className="btn-primary w-full" onClick={() => router.push('/shipping')}>Check Out</button>
+                <button
+                  className='btn-primary w-full'
+                  onClick={() => router.push('/shipping')}
+                >
+                  Check Out
+                </button>
               </li>
             </ul>
           </div>
@@ -98,4 +107,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default dynamic(() => Promise.resolve(Cart), { ssr: false })

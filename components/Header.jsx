@@ -1,8 +1,15 @@
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useCartContext } from '../hooks/useCartContext'
 
 export const Header = () => {
   const { cart } = useCartContext()
+  const [cartItemsQty, setCartItemsQty] = useState(0)
+
+  useEffect(() => {
+    setCartItemsQty(cart.cartItems.reduce((acc, cur) => acc + cur.qty, 0))
+  }, [])
+
   return (
     <header>
       <nav
@@ -16,9 +23,9 @@ export const Header = () => {
           <Link href='/cart'>
             <a className='px-2'>
               Cart
-              {cart.cartItems.length > 0 && (
+              {cartItemsQty > 0 && (
                 <span className='ml-1 py-0.5 px-1.5 rounded-full bg-teal-500 font-bold text-white text-xs'>
-                  {cart.cartItems.reduce((acc, cur) => acc + cur.qty, 0)}
+                  {cartItemsQty}
                 </span>
               )}
             </a>
