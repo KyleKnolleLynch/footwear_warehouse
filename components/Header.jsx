@@ -8,7 +8,7 @@ export const Header = () => {
 
   useEffect(() => {
     setCartItemsQty(cart.cartItems.reduce((acc, cur) => acc + cur.qty, 0))
-  }, [])
+  }, [cart.cartItems])
 
   return (
     <header>

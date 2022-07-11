@@ -41,3 +41,9 @@ select {
 .btn-primary {
   @apply rounded bg-teal-500 py-2 px-4 shadow outline-none hover:bg-teal-400 active:bg-teal-300;
 }
+
+input,
+select,
+textarea {
+  @apply rounded border p-2 outline-none ring-indigo-300 focus:ring
+}
