@@ -3,7 +3,9 @@
 
 *   Next.js
 *   MongoDB
+*   Mongoose
 *   TailwindCSS
 *   React-Hook-Form
 *   JS-Cookie
+*   bcrypt
 *   Heroicons
