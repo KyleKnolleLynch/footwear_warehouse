@@ -1,5 +1,7 @@
 import Head from 'next/head'
+import { ToastContainer } from 'react-toastify'
 import { Header, Footer } from './index'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const Layout = ({ title, children }) => {
   return (
@@ -11,6 +13,8 @@ export const Layout = ({ title, children }) => {
         <meta name='description' content='Ecommerce Website' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
+
+      <ToastContainer position='bottom-center' limit={1} />
 
       <div className='min-h-screen flex flex-col justify-between'>
         <Header />
