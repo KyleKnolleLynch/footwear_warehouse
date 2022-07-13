@@ -17,8 +17,7 @@ body {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  @apply text-teal-500 hover:text-teal-600;
 }
 
 img,
@@ -45,5 +44,9 @@ select {
 input,
 select,
 textarea {
-  @apply rounded border p-2 outline-none ring-indigo-300 focus:ring
+  @apply rounded border p-2 outline-none ring-indigo-300 focus:ring;
+}
+
+.dropdown-link {
+  @apply flex p-2 hover:bg-gray-200;
 }

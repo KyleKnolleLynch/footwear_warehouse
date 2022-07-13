@@ -90,7 +90,7 @@ const Login = () => {
           <button className='btn-primary'>Login</button>
         </div>
         <div className='mb-4'>
-          Don't have an account? &nbsp; <Link href='register'>Register</Link>
+          Don't have an account? &nbsp; <Link href='register'><a className='text-teal-600'>Register</a></Link>
         </div>
       </form>
     </Layout>
