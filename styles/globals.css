@@ -41,6 +41,10 @@ select {
   @apply rounded bg-teal-500 py-2 px-4 shadow outline-none hover:bg-teal-400 active:bg-teal-300;
 }
 
+.btn-default {
+  @apply rounded bg-gray-100 py-2 px-4 text-black shadow outline-none hover:bg-gray-200;
+}
+
 input,
 select,
 textarea {

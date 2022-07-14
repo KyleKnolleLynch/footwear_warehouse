@@ -25,15 +25,15 @@ export const cartReducer = (state, action) => {
       Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }))
       return { ...state, cart: { ...state.cart, cartItems } }
     }
-    case 'CART_REMOVE_ITEM': {
+    case 'CART_REMOVE_ITEM':
       const cartItems = state.cart.cartItems.filter(
         item => item.slug !== action.payload.slug
       )
       //  store cart items state in cookies
       Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }))
       return { ...state, cart: { ...state.cart, cartItems } }
-    }
-    case 'CART_RESET': {
+
+    case 'CART_RESET':
       Cookies.remove('cart')
       return {
         ...state,
@@ -43,8 +43,8 @@ export const cartReducer = (state, action) => {
           paymentMethod: '',
         },
       }
-    }
-    case 'SAVE_SHIPPING_INFO': {
+
+    case 'SAVE_SHIPPING_INFO':
       return {
         ...state,
         cart: {
@@ -55,7 +55,15 @@ export const cartReducer = (state, action) => {
           },
         },
       }
-    }
+
+    case 'SAVE_PAYMENT_METHOD':
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          paymentMethod: action.payload,
+        },
+      }
     default:
       return state
   }
