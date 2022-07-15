@@ -1,4 +1,2 @@
 export const getError = err =>
-  err.response && err.response.data.message
-    ? err.response.data.message
-    : err.message
+  err.response?.data.message ? err.response.data.message : err.message
