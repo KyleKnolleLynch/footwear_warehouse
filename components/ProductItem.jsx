@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export const ProductItem = ({ product }) => {
+export const ProductItem = ({ product, addToCartHandler }) => {
   return (
     <article className='card'>
       <Link href={`/product/${product.slug}`}>
@@ -21,7 +21,7 @@ export const ProductItem = ({ product }) => {
         </Link>
         <p className='mb-2'>{product.brand}</p>
         <p className='mb-2'>${product.price}</p>
-        <button type='button' className='btn-primary'>
+        <button type='button' className='btn-primary' onClick={() => addToCartHandler(product)}>
           Add to cart
         </button>
       </div>

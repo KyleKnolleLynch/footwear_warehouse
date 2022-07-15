@@ -1,30 +1,34 @@
+import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Layout } from '../../components'
-import { data } from '../../utils/data'
 import { useCartContext } from '../../hooks/useCartContext'
+import db from '../../utils/db'
+import Product from '../../models/Product'
+import { toast } from 'react-toastify'
 
-export default function ProductScreen() {
+export default function ProductScreen({ product }) {
   const { cart, dispatch } = useCartContext()
   const router = useRouter()
-  const { query } = useRouter()
-  const { slug } = query
-  const product = data.products.find(p => p.slug === slug)
 
   if (!product) {
-    return <div>Product not found</div>
+    return (
+      <Layout title='Product not found'>
+        <h2 className='text-lg'>Product not found</h2>
+      </Layout>
+    )
   }
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     //  check if item is already in cart, if so increment qty else add it to cart
     const existItem = cart.cartItems.find(i => i.slug === product.slug)
     const qty = existItem ? ++existItem.qty : 1
+    const { data } = await axios.get(`/api/products/${product._id}`)
 
-    //  throw alert if item's cart qty exceeds item's quantity in stock
-    if (product.qtyInStock < qty) {
-      alert('Sorry, this product is currently out of stock.')
-      return
+    //  ensure product is currently in stock with axios call & throw alert if item's cart qty exceeds item's quantity in stock
+    if (data.qtyInStock < qty) {
+      return toast.error('Sorry, item is currently out of stock')
     }
 
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, qty } })
@@ -85,4 +89,18 @@ export default function ProductScreen() {
       </section>
     </Layout>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { params } = context
+  const { slug } = params
+
+  await db.connect()
+  const product = await Product.findOne({ slug }).lean()
+  await db.disconnect()
+  return {
+    props: {
+      product: product ? db.convertDocToObj(product) : null,
+    },
+  }
 }

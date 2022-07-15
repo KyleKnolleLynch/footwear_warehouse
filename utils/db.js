@@ -33,5 +33,13 @@ async function disconnect() {
   }
 }
 
-const db = { connect, disconnect }
+//  Convert and replace _id from mongoose object to json object so it can be serialized in nextjs
+function convertDocToObj(doc) {
+  doc._id = String(doc._id)
+  doc.createdAt = String(doc.createdAt)
+  doc.updatedAt = String(doc.updatedAt)
+  return doc
+}
+
+const db = { connect, disconnect, convertDocToObj }
 export default db

@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Layout } from '../components'
@@ -5,15 +6,21 @@ import { useCartContext } from '../hooks/useCartContext'
 import { XCircleIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
+import { toast } from 'react-toastify'
 
 const Cart = () => {
   const { cart, dispatch } = useCartContext()
   const { cartItems } = cart
   const router = useRouter()
 
-  const updateCartHandler = (item, val) => {
+  const updateCartHandler = async (item, val) => {
     const qty = Number(val)
+    const { data } = await axios.get(`/api/products/${item._id}`)
+    if (data.qtyInStock < qty) {
+      return toast.error('Sorry, item is currently out of stock')
+    }
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, qty } })
+    toast.success('Item quantity updated')
   }
 
   const removeItemHandler = item => {
