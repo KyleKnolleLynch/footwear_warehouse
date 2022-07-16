@@ -54,7 +54,6 @@ const PlaceOrder = () => {
       toast.error(getError(err))
     }
   }
-  //  TODO timestamp: 3:48:00 need to create order details page and api
 
   useEffect(() => {
     if (!paymentMethod) {

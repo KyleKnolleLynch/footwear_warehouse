@@ -44,6 +44,9 @@ export const cartReducer = (state, action) => {
         },
       }
 
+    case 'CART_CLEAR_ITEMS':
+      return { ...state, cart: { ...state.cart, cartItems: [] } }
+
     case 'SAVE_SHIPPING_INFO':
       return {
         ...state,

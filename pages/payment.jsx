@@ -69,4 +69,6 @@ const Payment = () => {
   )
 }
 
+Payment.auth = true
+
 export default Payment
