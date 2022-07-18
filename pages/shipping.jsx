@@ -68,7 +68,7 @@ const Shipping = () => {
             })}
           />
           {errors.fullName && (
-            <div className='text-red-500'>{errors.fullName.message}</div>
+            <p className='text-red-500'>{errors.fullName.message}</p>
           )}
         </div>
         <div className='mb-4'>
@@ -87,7 +87,7 @@ const Shipping = () => {
             })}
           />
           {errors.address && (
-            <div className='text-red-500'>{errors.address.message}</div>
+            <p className='text-red-500'>{errors.address.message}</p>
           )}
         </div>
         <div className='mb-4'>
@@ -102,7 +102,7 @@ const Shipping = () => {
             })}
           />
           {errors.city && (
-            <div className='text-red-500'>{errors.city.message}</div>
+            <p className='text-red-500'>{errors.city.message}</p>
           )}
         </div>
         <div className='mb-4'>
@@ -117,7 +117,7 @@ const Shipping = () => {
             })}
           />
           {errors.postalCode && (
-            <div className='text-red-500'>{errors.postalCode.message}</div>
+            <p className='text-red-500'>{errors.postalCode.message}</p>
           )}
         </div>
         <div className='mb-4'>
@@ -132,7 +132,7 @@ const Shipping = () => {
             })}
           />
           {errors.country && (
-            <div className='text-red-500'>{errors.country.message}</div>
+            <p className='text-red-500'>{errors.country.message}</p>
           )}
         </div>
         <div className='mb-4 flex justify-between'>
