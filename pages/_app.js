@@ -2,18 +2,21 @@ import { CartContextProvider } from '../context/CartContext'
 import { SessionProvider, useSession } from 'next-auth/react'
 import '../styles/globals.css'
 import { useRouter } from 'next/router'
+import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <CartContextProvider>
-        {Component.auth ? (
-          <Auth>
+        <PayPalScriptProvider deferLoading={true}>
+          {Component.auth ? (
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          ) : (
             <Component {...pageProps} />
-          </Auth>
-        ) : (
-          <Component {...pageProps} />
-        )}
+          )}
+        </PayPalScriptProvider>
       </CartContextProvider>
     </SessionProvider>
   )
