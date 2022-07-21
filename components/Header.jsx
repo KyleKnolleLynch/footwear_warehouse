@@ -54,7 +54,7 @@ export const Header = () => {
                   </DropdownLink>
                 </Menu.Item>
                 <Menu.Item>
-                  <DropdownLink className='dropdown-link' href='/order-history'>
+                  <DropdownLink className='dropdown-link' href='/orderHistory'>
                     Order History
                   </DropdownLink>
                 </Menu.Item>
